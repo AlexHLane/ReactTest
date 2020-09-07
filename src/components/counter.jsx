@@ -7,6 +7,16 @@ class Counter extends Component {
     tags: [], //"tag1", "tag2", "tag3"],
   };
 
+  constructor() {
+    //calls on component constructor
+    super();
+
+    //binds this new obj of counter to the method so that it knows what object is being referenced, otherwise if you just tried to do inside handleIncrement this.state.count++, it would be undefined
+    //event handlers need to be bound in here or in arrow functions
+    //ex: handleIncrement = () => { func body };
+    this.handleIncrement = this.handleIncrement.bind(this);
+  }
+
   renderTags() {
     if (this.state.tags.length === 0) return <p>No tags available</p>;
 
@@ -19,6 +29,20 @@ class Counter extends Component {
     );
   }
 
+  //in button, this is passed as a reference, not being called as a regular method
+  handleIncrement() {
+    console.log("Increment clicked", this);
+
+    //you have to increment, but it won't know automatically to change the webpage, that is why you also have to setState so the virtual dom and real dom match up (to tell react what has changed)
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  //you can call these inside the render return as an inline function call instead of doing a wrapper with the parameter. So instead of that, you can do: onClick={() => this.handleDecrement(product)} where product is whatever you are looking at
+  handleDecrement = () => {
+    console.log("Decrement clicked", this);
+    this.setState({ count: this.state.count - 1 });
+  };
+
   render() {
     //don't need to save this as a variable, but this is what the original lines get replaced to
     //let classes = this.getBadgeClasses();
@@ -26,10 +50,25 @@ class Counter extends Component {
     return (
       <React.Fragment>
         <img src={this.state.imageUrl} alt="" />
+
         <span style={{ fontSize: 15 }} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
+
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Add
+        </button>
+
+        <button
+          onClick={this.handleDecrement}
+          className="bt btn-secondary btn-sm m-2"
+        >
+          Remove
+        </button>
+
         {this.state.tags.length === 0 &&
           "please create a new tag (except you can't do that yet hehehe)"}
         {this.renderTags()}
