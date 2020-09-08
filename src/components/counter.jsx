@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 
+//note on count: this.props.value, it can't be used if there is a constructor in the class because then value gets considered undefined. Is it cuz it is made there first? it runs through counters first and never hits ctr. Even with the order of operations and doing ctr first, it still doesn't hit the console.log in ctr
+
 class Counter extends Component {
   state = {
-    count: 0,
+    count: this.props.value,
     imageUrl: "https://picsum.photos/200",
     tags: [], //"tag1", "tag2", "tag3"],
   };
 
+  /*
   constructor() {
     //calls on component constructor
     super();
-
+    console.log("inside ctr");
     //binds this new obj of counter to the method so that it knows what object is being referenced, otherwise if you just tried to do inside handleIncrement this.state.count++, it would be undefined
     //event handlers need to be bound in here or in arrow functions
     //ex: handleIncrement = () => { func body };
     this.handleIncrement = this.handleIncrement.bind(this);
-  }
+  } //*/
 
   renderTags() {
     if (this.state.tags.length === 0) return <p>No tags available</p>;
@@ -31,6 +34,7 @@ class Counter extends Component {
 
   //in button, this is passed as a reference, not being called as a regular method
   handleIncrement() {
+    //= () => {
     console.log("Increment clicked", this);
 
     //you have to increment, but it won't know automatically to change the webpage, that is why you also have to setState so the virtual dom and real dom match up (to tell react what has changed)
@@ -46,6 +50,10 @@ class Counter extends Component {
   render() {
     //don't need to save this as a variable, but this is what the original lines get replaced to
     //let classes = this.getBadgeClasses();
+
+    console.log("props", this.props.value);
+
+    console.log(this.props);
 
     return (
       <React.Fragment>
