@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Counter from "./counter";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 class Counters extends Component {
   state = {
@@ -34,14 +33,12 @@ class Counters extends Component {
     //console.log("inside counters render");
     return (
       <div>
-        <ButtonGroup aria-label="Testing vertical">
-          <button
-            onClick={this.handleAdd}
-            classname="btn btn-outline-primary btn-sm m-4"
-          >
-            Add Item
-          </button>
-        </ButtonGroup>
+        <button
+          onClick={this.handleAdd}
+          classname="btn btn-outline-primary btn-sm m-4"
+        >
+          Add Item
+        </button>
 
         {this.state.counters.map((counter) => (
           <Counter
