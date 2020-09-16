@@ -33,13 +33,13 @@ class Counter extends Component {
   }
 
   //in button, this is passed as a reference, not being called as a regular method
-  handleIncrement() {
+  handleIncrement = () => {
     //= () => {
     console.log("Increment clicked", this);
 
     //you have to increment, but it won't know automatically to change the webpage, that is why you also have to setState so the virtual dom and real dom match up (to tell react what has changed)
     this.setState({ count: this.state.count + 1 });
-  }
+  };
 
   //you can call these inside the render return as an inline function call instead of doing a wrapper with the parameter. So instead of that, you can do: onClick={() => this.handleDecrement(product)} where product is whatever you are looking at
   handleDecrement = () => {
@@ -52,8 +52,6 @@ class Counter extends Component {
     //let classes = this.getBadgeClasses();
 
     console.log("props", this.props.value);
-
-    console.log(this.props);
 
     return (
       <React.Fragment>
@@ -72,9 +70,16 @@ class Counter extends Component {
 
         <button
           onClick={this.handleDecrement}
-          className="bt btn-secondary btn-sm m-2"
+          className="btn btn-secondary btn-sm m-2"
         >
           Remove
+        </button>
+
+        <button
+          onClick={() => this.props.onDelete(this.props.id)}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
         </button>
 
         {this.state.tags.length === 0 &&
