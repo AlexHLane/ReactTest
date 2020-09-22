@@ -4,7 +4,7 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: this.props.value,
+    //count: this.props.value,
     imageUrl: "https://picsum.photos/200",
     tags: [], //"tag1", "tag2", "tag3"],
   };
@@ -33,25 +33,27 @@ class Counter extends Component {
   }
 
   //in button, this is passed as a reference, not being called as a regular method
+  /*
   handleIncrement = () => {
     //= () => {
     console.log("Increment clicked", this);
 
     //you have to increment, but it won't know automatically to change the webpage, that is why you also have to setState so the virtual dom and real dom match up (to tell react what has changed)
     this.setState({ count: this.state.count + 1 });
-  };
+  }; //*/
 
   //you can call these inside the render return as an inline function call instead of doing a wrapper with the parameter. So instead of that, you can do: onClick={() => this.handleDecrement(product)} where product is whatever you are looking at
+  /*
   handleDecrement = () => {
     console.log("Decrement clicked", this);
     this.setState({ count: this.state.count - 1 });
-  };
+  }; //*/
 
   render() {
     //don't need to save this as a variable, but this is what the original lines get replaced to
     //let classes = this.getBadgeClasses();
 
-    console.log("props", this.props.value);
+    //console.log("props", this.props.counter.value);
 
     return (
       <React.Fragment>
@@ -62,21 +64,21 @@ class Counter extends Component {
         </span>
 
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm"
         >
           Add
         </button>
 
         <button
-          onClick={this.handleDecrement}
+          onClick={() => this.props.onDecrement(this.props.counter)}
           className="btn btn-secondary btn-sm m-2"
         >
           Remove
         </button>
 
         <button
-          onClick={() => this.props.onDelete(this.props.id)}
+          onClick={() => this.props.onDelete(this.props.counter.id)}
           className="btn btn-danger btn-sm m-2"
         >
           Delete
@@ -91,8 +93,10 @@ class Counter extends Component {
 
   getBadgeClasses() {
     //originally inside the render method, but makes it bulky and want to abstract it. highlighted 2 lines, right clicked, and chose refactor and it automatically pulled it into a new method with a variable assigned above with the return state of the method
+
     let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "danger" : "success";
+    classes += this.props.counter.value === 0 ? "danger" : "success";
+    console.log(classes);
     return classes;
   }
 
@@ -102,7 +106,9 @@ class Counter extends Component {
 
   formatCount() {
     //this is called object destructuring, getting the count property out of this object, this.state, and storing it into a different const called count
-    const { count } = this.state;
+    console.log(this.props.counter.value);
+    const count = this.props.counter.value;
+    console.log(count);
     return count === 0 ? "Zero" : count;
   }
 }
