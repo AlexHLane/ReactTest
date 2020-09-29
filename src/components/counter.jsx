@@ -10,6 +10,10 @@ class Counter extends Component {
   };
 
   /*
+  inside constructors, you cannot call set state because it is not yet in the DOM, it is still in the mounting phase
+
+  to be able to use props inside a constructor, you must pass it along as a parameter to the constructor and pass it into super(props) as well otherwise it will return undef
+
   constructor() {
     //calls on component constructor
     super();

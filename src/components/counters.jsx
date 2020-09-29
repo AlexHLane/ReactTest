@@ -3,31 +3,38 @@ import Counter from "./counter";
 
 class Counters extends Component {
   render() {
+    //using object destructuring, so I don't use this.props.blah everywhere, not really sure how it matches up to props under the hood, but keeping naming conventions will help
+    const {
+      onReset,
+      counters,
+      onAdd,
+      onDelete,
+      onIncrement,
+      onDecrement,
+    } = this.props;
+
     //console.log("inside counters render");
     return (
       <React.Fragment>
         <main classname="container">
           <button
-            onClick={this.props.onAdd}
+            onClick={onAdd}
             className="btn btn-outline-primary btn-sm m-4"
           >
             Add Item
           </button>
 
-          <button
-            onClick={this.props.onReset}
-            className="btn btn-warning btn-sm m-2"
-          >
+          <button onClick={onReset} className="btn btn-warning btn-sm m-2">
             Reset
           </button>
         </main>
 
-        {this.props.counters.map((counter) => (
+        {counters.map((counter) => (
           <Counter
             key={counter.id}
-            onDelete={this.props.onDelete}
-            onIncrement={this.props.onIncrement}
-            onDecrement={this.props.onDecrement}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
             counter={counter}
           >
             <h4>Title thingy: {counter.id}</h4>

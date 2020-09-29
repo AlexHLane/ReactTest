@@ -13,3 +13,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 //note to self, only 1 render works in here, the second and later ones get ignored
 //ReactDOM.render(element, document.getElementById("root"));
 serviceWorker.unregister();
+
+//shortcuts: imrc gives the import react component
+//           cc gives us the class extending a component
+//           stc creates stateless functional component template
