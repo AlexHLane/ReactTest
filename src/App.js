@@ -3,7 +3,11 @@ import logo from "./logo.svg";
 import NavBar from "./components/navbar";
 import Counters from "./components/counters";
 
+
 import "./App.css";
+
+/* https://www.youtube.com/watch?v=Ke90Tje7VS0
+modified from this tutorial */
 
 class App extends Component {
   //got rid of this from counters.jsx because we needed to "lift the state" up to the nearest parent that is above the components using it. Since both navbar and the counters use it, the parent is this: App

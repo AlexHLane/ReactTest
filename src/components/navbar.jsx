@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import LoginButton from "./login";
+
 //turned this into a stateless functional component
 //in functional components, you need to pass props in as a parameter whereas in class components, you can get it automatically
 //changed from class Navbar extends Component to a function call "NavBar" that returns a react element
@@ -8,7 +10,7 @@ import React, { Component } from "react";
 
 // originally the argument was just (props)
 //then with argument destructuring, because we only want the counter in this functional component, we changed it to ({totalItems}) which simplifies the code and avoids props.blah everywhere
-const NavBar = ({ totalItems }) => {
+const NavBar = ({ totalItems}) => {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <a className="navbar-brand text-light">Simply a Grocery Cart </a>
@@ -30,6 +32,9 @@ const NavBar = ({ totalItems }) => {
           Go!
         </button>
       </form>
+
+      <LoginButton/>
+
     </nav>
   );
 };
