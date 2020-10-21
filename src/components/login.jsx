@@ -1,4 +1,4 @@
-import withAuth from "@okta/okta-react/dist/withAuth";
+import withAuth from '@okta/okta-react/dist/withAuth';
 import React, { Component } from "react";
 
 import {Button, IconButton, Menu, MenuItem, ListItemText,} from '@material-ui/core';
@@ -33,7 +33,7 @@ class LoginButton extends Component {
   }
 
   //here to make sure you have access to the component otherwise you'd lose access to props or state
-  login = () => this.props.auth.login();
+  login = () => {this.props.auth.login();}
   logout = () => {
     this.handleMenuClose();
     this.props.auth.logout();
